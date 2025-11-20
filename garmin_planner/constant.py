@@ -1,5 +1,5 @@
 from enum import Enum
-
+# docu for sports and activity IDshttps://developer.garmin.com/connect-iq/api-docs/Toybox/Activity.html#Sport-module
 # A constant used to convert pace to certain value recognized by Garmin Connect
 PACE_CONST = 16.66666
 
@@ -12,7 +12,18 @@ class SportType(Enum):
       "sportTypeKey": "running",
       "displayOrder": 1
     }
+    
+    CYCLING = {
+      "sportTypeId": 2,
+      "sportTypeKey": "cycling",
+      "displayOrder": 2
+    }
 
+    SWIMMING = {
+      "sportTypeId": 3,
+      "sportTypeKey": "swimming",
+      "displayOrder": 3
+    }
     def to_dict(self):
         return self.value
 
@@ -54,9 +65,10 @@ class StepType(Enum):
         "stepTypeKey": "repeat",
         "displayOrder": 6
     }
-
     def to_dict(self):
         return self.value
+
+
 
 
 class ConditionType(Enum):
@@ -78,15 +90,17 @@ class ConditionType(Enum):
         "displayOrder": 3,
         "displayable": True
     }
+
     ITERATION_ENDS = {
         "conditionTypeId": 7,
         "conditionTypeKey": "iterations",
         "displayOrder": 7,
         "displayable": False
     }
-
     def to_dict(self):
         return self.value
+
+
 
 
 class TargetType(Enum):
@@ -101,11 +115,21 @@ class TargetType(Enum):
         "workoutTargetTypeKey": "pace.zone",
         "displayOrder": 6
     }
+    CADENZE = {
+        "workoutTargetTypeId": 3,
+        "workoutTargetTypeKey": "cadence",
+        "displayOrder": 3
+    }
     HEART_RATE_ZONE = {
         "workoutTargetTypeId": 4,
         "workoutTargetTypeKey": "heart.rate.zone",
         "displayOrder": 4
     }
-
+    POWER_ZONE = {
+        "workoutTargetTypeId": 2,
+        "workoutTargetTypeKey": "power.zone",
+        "displayOrder": 2
+    }
     def to_dict(self):
         return self.value
+

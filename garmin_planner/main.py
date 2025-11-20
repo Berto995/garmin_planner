@@ -37,12 +37,18 @@ def createWorkoutList(steps: list, stepCount: list):
 
 def createWorkoutStep(step: dict, stepCount: list):
     stepType = None
+    # esempio step: [{'warmup': '15min @H(z2)'}, {'repeat(8)': [{'run': '30sec @P(3:30-4:00)'}, {'recovery': '1200m'}]}, {'cooldown': '15min @H(z2)'}]
+
     for stepName in step:
         stepDetail = step[stepName]
         parsedStep, numIteration = parse_bracket(stepName)
         match parsedStep:
             case "run":
-                stepType = StepType.WARMUP
+                stepType = StepType.INTERVAL
+            case "bike":
+                stepType = StepType.INTERVAL
+            case "swim":
+                stepType = StepType.INTERVAL
             case "warmup":
                 stepType = StepType.WARMUP
             case "cooldown":
@@ -69,7 +75,7 @@ def createWorkoutStep(step: dict, stepCount: list):
 
 
 def createWorkoutJson(workoutName: str, steps: list):
-    stepCount = [0]
+    stepCount = [0] #TODO: is alwais the same and is used for repeat workout
     sport_type = SportType.RUNNING
     # distance_unit = DistanceUnit.KILOMETER
 
@@ -108,7 +114,7 @@ def importWorkouts(workouts: dict, toDeletePrevious: bool, conn: Client):
             for toDelete in filtered:
                 conn.deleteWorkout(toDelete)
 
-        steps = workouts[name]
+        steps = workouts[name] # [{'warmup': '15min @H(z2)'}, {'repeat(8)': [{'run': '30sec @P(3:30-4:00)'}, {'recovery': '1200m'}]}, {'cooldown': '15min @H(z2)'}]
         jsonData = createWorkoutJson(name, steps)
         conn.importWorkout(jsonData)
 
