@@ -11,13 +11,13 @@ definitions:
 
 # define workouts here
 workouts:
-  # interval_Vo2Max:
-  #   - type: running
-  #   - warmup: 15min @H(z2)
-  #   - repeat(8):
-  #     - run: 30sec @P($VO2MaxP)
-  #     - recovery: 1200m
-  #   - cooldown: 15min @H(z2)
+  interval_Vo2Max:
+    - type: running
+    - warmup: 15min @H(z2)
+    - repeat(8):
+      - run: 30sec @P($VO2MaxP)
+      - recovery: 1200m
+    - cooldown: 15min @H(z2)
   # e_16k:
   #   - warmup: 2000m @H(z2)
   #   - run: 12000m @P($GA)
@@ -35,14 +35,15 @@ workouts:
   #   - run: 4000m @P($GA)
   #   - cooldown: 2000m @H(z2)
   # ga_5k:
+  #   - type: running
   #   - warmup: 1000m @H(z2)
   #   - run: 3000m @P($GA)
   #   - cooldown: 1000m @H(z2)
-  # ga_6k_bike:
-  #   - type: cycling
-  #   - warmup: 1000m @H(z2)
-  #   - ride: 4000m @W(z5)
-  #   - cooldown: 1000m @H(z2)
+  ga_6k_bike:
+    - type: cycling
+    - warmup: 1000m @H(z2)
+    - ride: 4000m @W(z5)
+    - cooldown: 1000m @H(z2)
   # ga_6k:
   #   - type: running
   #   - warmup: 1000m @H(z2)
@@ -50,20 +51,18 @@ workouts:
   #   - cooldown: 1000m @H(z2)
   ga_6k_swim:
     - type: swimming
-    - warmup: 1000m @H(z2)
-    - swim: 4000m @H(z2) @style(back) @equip(pull_buoy) @execution(pull)
-    - cooldown: 1000m @H(z2)
+    - swim: 400m @P(1:50)
 
 # schedule workouts
 schedulePlan:
-  start_from: 2025-11-20
+  start_from: 2025-11-21
   workouts: 
     # week 1
     - interval_Vo2Max
     # - ga_10k
     # - ga_5k
     # - ga_6k
-    # - ga_6k_bike
+    - ga_6k_bike
     - ga_6k_swim
     # - rest 
     # - ga_10k

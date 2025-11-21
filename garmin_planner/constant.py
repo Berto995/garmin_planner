@@ -27,10 +27,19 @@ class SportType(Enum):
     def to_dict(self):
         return self.value
 
+class SwimUnit(Enum):
+    METERS={
+        "unitKey": "meter"
+    }
+    def to_dict(self):
+        return self.value
 
 class DistanceUnit(Enum):
     KILOMETER = {
       "unitKey": "kilometer"
+    }
+    METERS = {
+      "unitKey": "meter"
     }
     MILE = {
       "unitKey": "mile"

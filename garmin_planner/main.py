@@ -90,7 +90,6 @@ def createWorkoutJson(workoutName: str, steps: list):
         sportType=sport_type,
         workoutSteps=workoutSteps
     )
-
     workout_model = WorkoutModel(
         workoutName=workoutName,
         sportType=sport_type,
@@ -102,7 +101,6 @@ def createWorkoutJson(workoutName: str, steps: list):
         estimatedDistanceInMeters=None,
         estimateType=None
     )
-
     return json.dumps(workout_model, default=serialize)
 
 def importWorkouts(workouts: dict, toDeletePrevious: bool, conn: Client):
@@ -119,6 +117,7 @@ def importWorkouts(workouts: dict, toDeletePrevious: bool, conn: Client):
 
         steps = workouts[name] # [{'warmup': '15min @H(z2)'}, {'repeat(8)': [{'run': '30sec @P(3:30-4:00)'}, {'recovery': '1200m'}]}, {'cooldown': '15min @H(z2)'}]
         jsonData = createWorkoutJson(name, steps)
+        print(jsonData)
         conn.importWorkout(jsonData)
 
 def scheduleWorkouts(startfrom: datetime, workouts: dict, conn: Client):

@@ -37,6 +37,10 @@ def parse_time_to_minutes(time_string):
     minutes, sec = map(int, time_string.split(":"))
     time_in_min = minutes + (sec / 60)
     return time_in_min
+def parse_time_to_seconds(time_string):
+    minutes, sec = map(int, time_string.split(":"))
+    time_in_sec = minutes * 60 + sec
+    return time_in_sec
 
 def parse_stepdetail(string, sport_type):
     stepDetails = {}
@@ -83,15 +87,16 @@ def parse_stepdetail(string, sport_type):
                     })
                 continue
 
+
             # Target
             if ("@" in detail):
                 target, value = parse_bracket(detail)
-                print(f"Target: {target}, Value: {value}")
                 if (target == None or value == None):
                     continue
+                
 
                 ## Pace
-                if (target.upper() == "@P"):
+                if (target.upper() == "@P") and sport_type != SportType.SWIMMING:
                     floor, top = value.split("-")
                     floorMin = parse_time_to_minutes(floor)
                     topMin = parse_time_to_minutes(top)
@@ -100,7 +105,22 @@ def parse_stepdetail(string, sport_type):
                         'targetValueOne': PACE_CONST/floorMin,
                         'targetValueTwo': PACE_CONST/topMin
                     })
+                    print({
+                        'targetType': TargetType.PACE,
+                        'targetValueOne': PACE_CONST/floorMin,
+                        'targetValueTwo': PACE_CONST/topMin
+                    })
                     continue
+                elif (target.upper() == "@P") and sport_type == SportType.SWIMMING:
+                    floorSec = parse_time_to_seconds(value)
+                    print(floorSec)
+                    stepDetails.update({
+                        'targetType': TargetType.NO_TARGET,
+                        'secondaryTargetType': TargetType.PACE,
+                        'secondaryTargetValueOne': 100/floorSec,
+                    })
+                    continue
+                    
 
                 if (target.upper() == "@S"):
                     speedValueLowLimit = float(value)

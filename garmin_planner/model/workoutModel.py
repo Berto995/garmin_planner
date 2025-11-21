@@ -1,4 +1,4 @@
-from garmin_planner.constant import SportType, DistanceUnit, StepType, ConditionType, TargetType
+from garmin_planner.constant import SportType, DistanceUnit, StepType, ConditionType, SwimUnit, TargetType
 from dataclasses import dataclass
 from typing import Optional, List, Union
 
@@ -20,6 +20,13 @@ class WorkoutStep:
     strokeType: Optional[str] = None
     equipmentType: Optional[str] = None
     drillType: Optional[str] = None
+    secondaryTargetType: Optional[TargetType] = None
+    secondaryTargetValueOne: Optional[float] = None
+    preferredEndConditionUnit: Optional[SwimUnit] = None
+    secondaryTargetValueTwo: Optional[float] = None
+    secondaryTargetValueUnit: Optional[str] = None
+
+    
 
 @dataclass
 class RepeatStep:
