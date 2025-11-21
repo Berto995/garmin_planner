@@ -105,15 +105,10 @@ def parse_stepdetail(string, sport_type):
                         'targetValueOne': PACE_CONST/floorMin,
                         'targetValueTwo': PACE_CONST/topMin
                     })
-                    print({
-                        'targetType': TargetType.PACE,
-                        'targetValueOne': PACE_CONST/floorMin,
-                        'targetValueTwo': PACE_CONST/topMin
-                    })
+
                     continue
                 elif (target.upper() == "@P") and sport_type == SportType.SWIMMING:
                     floorSec = parse_time_to_seconds(value)
-                    print(floorSec)
                     stepDetails.update({
                         'targetType': TargetType.NO_TARGET,
                         'secondaryTargetType': TargetType.PACE,
@@ -133,8 +128,9 @@ def parse_stepdetail(string, sport_type):
                     continue
 
                 if (target.upper() == "@C"):
-                    cadenceValueLowLimit = int(value)
-                    cadenceValueHighLimit = int(value)
+                    _min_c, _max_c = value.split("-")
+                    cadenceValueLowLimit = int(_min_c)
+                    cadenceValueHighLimit = int(_max_c)
                     stepDetails.update({
                         'targetType': TargetType.CADENCE,
                         'targetValueOne': cadenceValueLowLimit,

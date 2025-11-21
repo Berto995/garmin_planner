@@ -62,7 +62,6 @@ def createWorkoutStep(step: dict, stepCount: list, sport_type):
             case _:
                 logger.error("default in workout step")
                 return None
-
         parsedStepDetailDict = parse_stepdetail(stepDetail, sport_type)
 
         stepCount[0] += 1
@@ -117,7 +116,6 @@ def importWorkouts(workouts: dict, toDeletePrevious: bool, conn: Client):
 
         steps = workouts[name] # [{'warmup': '15min @H(z2)'}, {'repeat(8)': [{'run': '30sec @P(3:30-4:00)'}, {'recovery': '1200m'}]}, {'cooldown': '15min @H(z2)'}]
         jsonData = createWorkoutJson(name, steps)
-        print(jsonData)
         conn.importWorkout(jsonData)
 
 def scheduleWorkouts(startfrom: datetime, workouts: dict, conn: Client):
