@@ -76,8 +76,16 @@ def createWorkoutStep(step: dict, stepCount: list):
 
 def createWorkoutJson(workoutName: str, steps: list):
     stepCount = [0] #TODO: is alwais the same and is used for repeat workout
-    sport_type = SportType.RUNNING
+    _dict_sport = dict(steps[0])["type"]
+    if _dict_sport == "running":
+        sport_type = SportType.RUNNING
+    elif _dict_sport == "cycling":
+        sport_type = SportType.CYCLING
+    elif _dict_sport == "swimming":
+        sport_type = SportType.SWIMMING
     # distance_unit = DistanceUnit.KILOMETER
+    steps.pop(0)
+
 
     workoutSteps = createWorkoutList(steps, stepCount)
 

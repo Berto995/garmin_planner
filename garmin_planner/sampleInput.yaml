@@ -37,11 +37,18 @@ workouts:
   #   - warmup: 1000m @H(z2)
   #   - run: 3000m @P($GA)
   #   - cooldown: 1000m @H(z2)
-  ga_6k:
+  ga_6k_bike:
+    - type: cycling
     - warmup: 1000m @H(z2)
     - run: 4000m @P($GA)
     - cooldown: 1000m @H(z2)
   ga_6k:
+    - type: running
+    - warmup: 1000m @H(z2)
+    - run: 4000m @P($GA)
+    - cooldown: 1000m @H(z2)
+  ga_6k_swim:
+    - type: swimming
     - warmup: 1000m @H(z2)
     - run: 4000m @P($GA)
     - cooldown: 1000m @H(z2)
@@ -54,8 +61,8 @@ schedulePlan:
     # - ga_10k
     # - ga_5k
     - ga_6k
-    # - rest
-    # - e_14k
+    - ga_6k_bike
+    - ga_6k_swim
     # - rest 
     # - ga_10k
 
