@@ -1,5 +1,6 @@
+
 settings:
-  deleteSameNameWorkout: false
+  deleteSameNameWorkout: true
 
 definitions:
   GA: 6:35-7:00
@@ -18,42 +19,43 @@ workouts:
   #     - run: 30sec @P($VO2MaxP)
   #     - recovery: 1200m
   #   - cooldown: 15min @H(z2)
-  ga_5k:
-    - type: running
-    - warmup: 1000m @H(z2)
-  # ga_6k_bike:
-  #   - type: cycling
+  e_16k:
+    - type: cycling
+    - warmup: 2000m @H(z2)
+    - run: 12000m @P($GA)
+    - cooldown: 2000m @H(z2)
+  # e_14k:
+  #   - warmup: 2000m @H(z2)
+  #   - run: 10000m @P($GA)
+  #   - cooldown: 2000m @H(z2)
+  # ga_10k:
   #   - warmup: 1000m @H(z2)
-  #   - ride: 40000m @C(75-85)
+  #   - run: 8000m @P($GA)
+  #   - cooldown: 1000m @H(z2)
+  # ga_8k:
+  #   - warmup: 2000m @H(z2)
+  #   - run: 4000m @P($GA)
+  #   - cooldown: 2000m @H(z2)
+  # ga_5k:
+  #   - warmup: 1000m @H(z2)
+  #   - run: 3000m @P($GA)
   #   - cooldown: 1000m @H(z2)
   # ga_6k:
-  #   - type: running
   #   - warmup: 1000m @H(z2)
   #   - run: 4000m @P($GA)
   #   - cooldown: 1000m @H(z2)
-  # ga_swim:
-  #   - type: swimming
-  #   - warmup: 200m @H(z2)
-  #   - swim: 400m @P(1:50) @EQUIP(fins) @EXECUTION(drill)
-  #   - recovery: 100m @H(z1)
-  #   - swim: 400m @P(1:40) @STYLE(back) @EXECUTION(pull)
-  #   - recovery: 100m @H(z1)
-  #   - swim: 400m @P(1:30) @EQUIP(PULL_BUOY) @STYLE(breast)
-  #   - cooldown: 200m @H(z2)
 
 # schedule workouts
 schedulePlan:
   start_from: 2025-11-22
   workouts: 
-    week 1
-    - rest
-    - rest
-    - ga_5k
+    # week 1
+    - e_16k
+    # - ga_6k
     # - rest
-    # - ga_6k_bike
-    # - rest
+    # - e_14k
     # - rest 
-    # - ga_swim
+    # - ga_10k
 
     # week 2
     # - ga_5k

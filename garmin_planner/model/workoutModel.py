@@ -25,6 +25,7 @@ class WorkoutStep:
     preferredEndConditionUnit: Optional[SwimUnit] = None
     secondaryTargetValueTwo: Optional[float] = None
     secondaryTargetValueUnit: Optional[str] = None
+    secondaryZoneNumber: Optional[int] = None
 
     
 

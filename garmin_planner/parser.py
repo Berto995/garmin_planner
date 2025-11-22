@@ -100,11 +100,18 @@ def parse_stepdetail(string, sport_type):
                     floor, top = value.split("-")
                     floorMin = parse_time_to_minutes(floor)
                     topMin = parse_time_to_minutes(top)
-                    stepDetails.update({
-                        'targetType': TargetType.PACE,
-                        'targetValueOne': PACE_CONST/floorMin,
-                        'targetValueTwo': PACE_CONST/topMin
-                    })
+                    if stepDetails.get('targetType') is None:
+                        stepDetails.update({
+                            'targetType': TargetType.PACE,
+                            'targetValueOne': PACE_CONST/floorMin,
+                            'targetValueTwo': PACE_CONST/topMin
+                        })
+                    else:
+                        stepDetails.update({
+                            'secondaryTargetType': TargetType.PACE,
+                            'secondaryTargetValueOne': PACE_CONST/floorMin,
+                            'secondaryTargetValueTwo': PACE_CONST/topMin
+                        })
 
                     continue
                 elif (target.upper() == "@P") and sport_type == SportType.SWIMMING:
@@ -115,45 +122,73 @@ def parse_stepdetail(string, sport_type):
                         'secondaryTargetValueOne': 100/floorSec,
                     })
                     continue
+
                     
 
                 if (target.upper() == "@S"):
                     speedValueLowLimit = float(value)
                     speedValueHighLimit = float(value)
-                    stepDetails.update({
-                        'targetType': TargetType.SPEED,
-                        'targetValueOne': speedValueLowLimit,
-                        'targetValueTwo': speedValueHighLimit
-                    })
+                    if stepDetails.get('targetType') is None:
+                        stepDetails.update({
+                            'targetType': TargetType.SPEED,
+                            'targetValueOne': speedValueLowLimit,
+                            'targetValueTwo': speedValueHighLimit
+                        })
+                    else:
+                        stepDetails.update({
+                            'secondaryTargetType': TargetType.SPEED,
+                            'secondaryTargetValueOne': speedValueLowLimit,
+                            'secondaryTargetValueTwo': speedValueHighLimit
+                        })
                     continue
 
                 if (target.upper() == "@C"):
                     _min_c, _max_c = value.split("-")
                     cadenceValueLowLimit = int(_min_c)
                     cadenceValueHighLimit = int(_max_c)
-                    stepDetails.update({
-                        'targetType': TargetType.CADENCE,
-                        'targetValueOne': cadenceValueLowLimit,
-                        'targetValueTwo': cadenceValueHighLimit
-                    })
+                    if stepDetails.get('targetType') is None:
+                        stepDetails.update({
+                            'targetType': TargetType.CADENCE,
+                            'targetValueOne': cadenceValueLowLimit,
+                            'targetValueTwo': cadenceValueHighLimit
+                        })
+                    else:
+                        stepDetails.update({
+                            'secondaryTargetType': TargetType.CADENCE,
+                            'secondaryTargetValueOne': cadenceValueLowLimit,
+                            'secondaryTargetValueTwo': cadenceValueHighLimit
+                        })
                     continue
 
                 ## Heart rate zone
                 if (target.upper() == "@H"):
                     value = value.lower().replace("z", "")
                     rateZone = int(value)
-                    stepDetails.update({
-                        'targetType': TargetType.HEART_RATE_ZONE,
-                        'zoneNumber': rateZone
-                    })
+                    if stepDetails.get('targetType') is None:
+                        stepDetails.update({
+                            'targetType': TargetType.HEART_RATE_ZONE,
+                            'zoneNumber': rateZone
+                        })
+                    else:
+                        stepDetails.update({
+                            'secondaryTargetType': TargetType.HEART_RATE_ZONE,
+                            'secondaryZoneNumber': rateZone
+                        })
                     continue
+
                 if (target.upper() == "@W"):
                     value = value.lower().replace("z", "")
                     powerZone = int(value)
-                    stepDetails.update({
-                        'targetType': TargetType.POWER_ZONE,
-                        'zoneNumber': powerZone
-                    })
+                    if stepDetails.get('targetType') is None:
+                        stepDetails.update({
+                            'targetType': TargetType.POWER_ZONE,
+                            'zoneNumber': powerZone
+                        })
+                    else:
+                        stepDetails.update({
+                            'secondaryTargetType': TargetType.POWER_ZONE,
+                            'secondaryZoneNumber': powerZone
+                        })
                     continue
 
                 if (target.upper() == "@STYLE"):
